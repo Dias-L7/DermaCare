@@ -24,7 +24,7 @@ export default function HomeScreen() {
   const { doctors, status, reload } = useDoctors();
   const { favoriteIds, toggleFavorite } = useFavorites();
   const [query, setQuery] = useState('');
-  const [onlyFavorites, setOnlyFavorites] = useState(false);
+  const [onlyFavorites] = useState(false);
   const [info, setInfo] = useState<Doctor | null>(null);
   const [bellOpen, setBellOpen] = useState(false);
 
@@ -51,13 +51,13 @@ export default function HomeScreen() {
             icon="doctors"
             label={t.home.doctors}
             active={!onlyFavorites}
-            onPress={() => setOnlyFavorites(false)}
+            onPress={() => router.push('/doctors')}
           />
           <QuickAction
             icon="heart"
             label={t.home.favorites}
             active={onlyFavorites}
-            onPress={() => setOnlyFavorites(true)}
+            onPress={() => router.push('/favorites')}
           />
           <SearchBar value={query} onChangeText={setQuery} placeholder={t.home.searchPlaceholder} />
         </View>
