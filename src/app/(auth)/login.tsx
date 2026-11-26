@@ -5,7 +5,6 @@ import { AuthScreen } from '../../components/AuthScreen';
 import { Button } from '../../components/Button';
 import { Field } from '../../components/Field';
 import { LinkRow } from '../../components/LinkRow';
-import { SocialRow } from '../../components/SocialRow';
 import { useLanguage } from '../../context/LanguageContext';
 import { useUser } from '../../context/UserContext';
 import type { ErrorKey } from '../../i18n/types';
@@ -82,7 +81,7 @@ export default function LoginScreen() {
       <View style={styles.button}>
         <Button title={t.auth.loginButton} onPress={submit} />
       </View>
-      <SocialRow />
+
       <LinkRow
         text={t.auth.noAccount}
         linkText={t.auth.signUpLink}
