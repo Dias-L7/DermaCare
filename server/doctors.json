@@ -1,7 +1,52 @@
 [
-  { "id": "d1", "name": "Алия Нурпеисова", "specialty": "oncology", "rating": 5.0, "reviews": 63, "experience": 12, "avatar": 0 },
-  { "id": "d2", "name": "Данияр Омаров", "specialty": "genetics", "rating": 4.9, "reviews": 48, "experience": 9, "avatar": 1 },
-  { "id": "d3", "name": "Мадина Ержанова", "specialty": "cosmetic", "rating": 4.7, "reviews": 36, "experience": 7, "avatar": 2 },
-  { "id": "d4", "name": "Руслан Касымов", "specialty": "pediatric", "rating": 4.6, "reviews": 29, "experience": 6, "avatar": 3 },
-  { "id": "d5", "name": "Айгерим Сейтова", "specialty": "genetics", "rating": 4.5, "reviews": 22, "experience": 5, "avatar": 4 }
+  {
+    "id": "d1",
+    "name": "Алия Нурпеисова",
+    "gender": "female",
+    "specialty": "oncology",
+    "rating": 5.0,
+    "reviews": 63,
+    "experience": 12,
+    "avatar": 0
+  },
+  {
+    "id": "d2",
+    "name": "Данияр Омаров",
+    "gender": "male",
+    "specialty": "genetics",
+    "rating": 4.9,
+    "reviews": 48,
+    "experience": 9,
+    "avatar": 1
+  },
+  {
+    "id": "d3",
+    "name": "Мадина Ержанова",
+    "gender": "female",
+    "specialty": "cosmetic",
+    "rating": 4.7,
+    "reviews": 36,
+    "experience": 7,
+    "avatar": 2
+  },
+  {
+    "id": "d4",
+    "name": "Руслан Касымов",
+    "gender": "male",
+    "specialty": "pediatric",
+    "rating": 4.6,
+    "reviews": 29,
+    "experience": 6,
+    "avatar": 3
+  },
+  {
+    "id": "d5",
+    "name": "Айгерим Сейтова",
+    "gender": "female",
+    "specialty": "genetics",
+    "rating": 4.5,
+    "reviews": 22,
+    "experience": 5,
+    "avatar": 4
+  }
 ]
