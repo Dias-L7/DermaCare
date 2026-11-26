@@ -21,6 +21,10 @@ const paths = {
   comment: '<path d="M4 5h16v11H9l-5 4z"/>',
   check: '<path d="M5 12l5 5 9-10"/>',
   logout: '<path d="M9 4H5a1 1 0 00-1 1v14a1 1 0 001 1h4M16 8l4 4-4 4M20 12H9"/>',
+  female: '<circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/>',
+  male: '<circle cx="10" cy="14" r="5"/><path d="M14 10l6-6M15 4h5v5"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  chevronDown: '<path d="M6 9l6 6 6-6"/>',
 };
 
 export type IconName = keyof typeof paths;
