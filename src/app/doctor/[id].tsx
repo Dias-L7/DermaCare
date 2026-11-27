@@ -90,6 +90,13 @@ export default function DoctorInfoScreen() {
                             <Text style={styles.scheduleText}>{t.doctors.schedule}</Text>
                         </Pressable>
                         <View style={styles.flex} />
+                        <Pressable
+                            onPress={() => router.push({ pathname: '/conversation/[id]', params: { id: doctor.id } })}
+                            hitSlop={6}
+                            style={[styles.iconButton, styles.chatButton]}
+                        >
+                            <Icon name="chat" color={colors.primary} size={16} />
+                        </Pressable>
                         <Pressable onPress={() => toggleFavorite(doctor.id)} hitSlop={6} style={styles.iconButton}>
                             <Icon name="heart" color={colors.primary} size={16} filled={favorite} />
                         </Pressable>
@@ -161,6 +168,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         borderRadius: radius.pill,
     },
+    chatButton: { marginRight: spacing.sm },
     sectionTitle: { ...fonts.bold, fontSize: 15, color: colors.primary, marginBottom: 4 },
     sectionText: { ...fonts.regular, fontSize: 13, lineHeight: 19, color: colors.text },
 });
