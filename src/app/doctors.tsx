@@ -66,7 +66,7 @@ export default function DoctorsScreen() {
                 favorite={favoriteIds.includes(doctor.id)}
                 onInfo={() => router.push({ pathname: '/doctor/[id]', params: { id: doctor.id } })}
                 onToggleFavorite={() => toggleFavorite(doctor.id)}
-                onAppointment={() => router.navigate('/calendar')}
+                onAppointment={() => router.push({ pathname: '/book/[id]', params: { id: doctor.id } })}
             />
         ));
     };

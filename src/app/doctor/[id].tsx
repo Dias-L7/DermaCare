@@ -5,10 +5,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Avatar } from '../../components/Avatar';
 import { EmptyState } from '../../components/EmptyState';
 import { Icon } from '../../components/Icon';
+import { MonthCalendar } from '../../components/MonthCalendar';
 import { ScreenHeader } from '../../components/ScreenHeader';
 import { useDoctors } from '../../context/DoctorsContext';
 import { useFavorites } from '../../context/FavoritesContext';
 import { useLanguage } from '../../context/LanguageContext';
+import { bookingDays } from '../../data/appointments';
 import { doctorBios } from '../../data/doctorBios';
 import { colors, fonts, radius, spacing } from '../../theme';
 
@@ -31,6 +33,8 @@ export default function DoctorInfoScreen() {
 
     const favorite = favoriteIds.includes(doctor.id);
     const bio = doctorBios[doctor.id]?.[language];
+    const book = (day?: number) =>
+        router.push({ pathname: '/book/[id]', params: { id: doctor.id, day: String(day ?? 0) } });
     const sections = [
         { title: t.doctors.profile, text: bio?.profile ?? t.doctors.profileText },
         { title: t.doctors.career, text: bio?.career ?? t.doctors.careerText },
@@ -85,7 +89,7 @@ export default function DoctorInfoScreen() {
                     </View>
 
                     <View style={styles.actionsRow}>
-                        <Pressable onPress={() => router.navigate('/calendar')} style={styles.scheduleButton}>
+                        <Pressable onPress={() => book()} style={styles.scheduleButton}>
                             <Icon name="calendar" color={colors.white} size={14} />
                             <Text style={styles.scheduleText}>{t.doctors.schedule}</Text>
                         </Pressable>
@@ -109,6 +113,8 @@ export default function DoctorInfoScreen() {
                         <Text style={styles.sectionText}>{section.text}</Text>
                     </View>
                 ))}
+                <Text style={styles.sectionTitle}>{t.booking.bookCalendar}</Text>
+                <MonthCalendar maxDays={bookingDays} onSelect={book} />
             </ScrollView>
         </View>
     );
