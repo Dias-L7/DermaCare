@@ -34,6 +34,7 @@ const paths = {
   facebook: '<circle cx="12" cy="12" r="9"/><path d="M13 21v-8h3M13 13v-2a2 2 0 012-2h1M10 13h6"/>',
   instagram: '<rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><path d="M17 7h.01"/>',
   pencil: '<path d="M4 20h4L19 9l-4-4L4 16z"/>',
+  send: '<path d="M4 12l16-8-6 16-3-7z"/><path d="M11 13l9-9"/>',
   chevronDown: '<path d="M6 9l6 6 6-6"/>',
 };
 
