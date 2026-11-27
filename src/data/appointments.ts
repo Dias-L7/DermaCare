@@ -7,8 +7,11 @@ export type Patient = {
   gender: 'male' | 'female' | 'other';
 };
 
+export type AppointmentStatus = 'upcoming' | 'completed' | 'cancelled';
+
 export type Appointment = {
   id: string;
+  status: AppointmentStatus;
   dayOffset: number;
   hour: number;
   doctorId: string;
@@ -16,15 +19,31 @@ export type Appointment = {
   /** Есть только у записей, сделанных через экран «Запись на приём» */
   patient?: Patient;
   problem?: string;
+  /** Оплачена ли запись */
+  paid?: boolean;
+  /** Причина отмены */
+  cancelReason?: string;
 };
 
 export const appointments: Appointment[] = [
-  { id: 'a1', dayOffset: 0, hour: 10, doctorId: 'd1', topic: 'mole' },
-  { id: 'a2', dayOffset: 2, hour: 9, doctorId: 'd3', topic: 'acne' },
-  { id: 'a3', dayOffset: 2, hour: 11, doctorId: 'd2', topic: 'consultation' },
-  { id: 'a4', dayOffset: 3, hour: 12, doctorId: 'd4', topic: 'dermatitis' },
-  { id: 'a5', dayOffset: 5, hour: 10, doctorId: 'd1', topic: 'consultation' },
+  { id: 'a1', status: 'upcoming', dayOffset: 0, hour: 10, doctorId: 'd1', topic: 'mole', paid: true },
+  { id: 'a2', status: 'upcoming', dayOffset: 2, hour: 9, doctorId: 'd3', topic: 'acne', paid: true },
+  { id: 'a3', status: 'upcoming', dayOffset: 2, hour: 11, doctorId: 'd2', topic: 'consultation', paid: true },
+  { id: 'a4', status: 'upcoming', dayOffset: 3, hour: 12, doctorId: 'd4', topic: 'dermatitis', paid: true },
+  { id: 'a5', status: 'upcoming', dayOffset: 5, hour: 10, doctorId: 'd1', topic: 'consultation', paid: true },
+  // Прошедшие записи — для вкладок «Завершённые» и «Отменённые»
+  { id: 'p1', status: 'completed', dayOffset: -4, hour: 11, doctorId: 'd6', topic: 'consultation', paid: true },
+  { id: 'p2', status: 'completed', dayOffset: -12, hour: 9, doctorId: 'd9', topic: 'acne', paid: true },
+  { id: 'p3', status: 'completed', dayOffset: -20, hour: 14, doctorId: 'd2', topic: 'consultation', paid: true },
+  { id: 'p4', status: 'cancelled', dayOffset: -7, hour: 15, doctorId: 'd8', topic: 'consultation', cancelReason: 'Неожиданная работа' },
 ];
+
+/** Стоимость одного приёма, ₸ */
+export const visitPrice = 15000;
+
+export function formatPrice(value: number) {
+  return `${String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} ₸`;
+}
 
 export const workHours = [9, 10, 11, 12];
 

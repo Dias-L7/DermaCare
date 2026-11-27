@@ -48,7 +48,7 @@ export default function BookScreen() {
 
     // Час занят, если врач «занят» или у вас уже есть запись на это время
     const isBusy = (h: number) =>
-        isDoctorBusy(doctor.id, day, h) || appointments.some((item) => item.dayOffset === day && item.hour === h);
+        isDoctorBusy(doctor.id, day, h) || appointments.some((item) => item.status === 'upcoming' && item.dayOffset === day && item.hour === h)
     const free = bookingHours.filter((h) => !isBusy(h));
     const chosenHour = hour !== null && free.includes(hour) ? hour : free[0];
 
@@ -72,7 +72,7 @@ export default function BookScreen() {
             },
             problem: problem.trim(),
         });
-        router.replace({ pathname: '/appointment/[id]', params: { id } });
+        router.replace({ pathname: '/payment/[id]', params: { id } });
     };
 
     const genders: { key: Gender; label: string }[] = [

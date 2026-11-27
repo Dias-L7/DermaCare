@@ -12,7 +12,8 @@ import { ScheduleCard, type ScheduleEntry } from './ScheduleCard';
 export function Schedule() {
   const { t } = useLanguage();
   const { doctors } = useDoctors();
-  const { appointments } = useAppointments();
+  const { appointments: all } = useAppointments();
+  const appointments = all.filter((item) => item.status === 'upcoming');
   const [selected, setSelected] = useState(0);
   const days = useMemo(() => getDays(6), []);
 

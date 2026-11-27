@@ -1,10 +1,8 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Avatar } from '../../components/Avatar';
-import { BottomSheet } from '../../components/BottomSheet';
 import { EmptyState } from '../../components/EmptyState';
 import { Icon } from '../../components/Icon';
 import { ScreenHeader } from '../../components/ScreenHeader';
@@ -17,9 +15,8 @@ export default function AppointmentScreen() {
     const insets = useSafeAreaInsets();
     const { t } = useLanguage();
     const { id } = useLocalSearchParams<{ id: string }>();
-    const { appointments, cancel } = useAppointments();
+    const { appointments } = useAppointments();
     const { doctors } = useDoctors();
-    const [cancelOpen, setCancelOpen] = useState(false);
 
     const appointment = appointments.find((item) => item.id === id);
     const doctor = doctors.find((item) => item.id === appointment?.doctorId);
@@ -47,12 +44,6 @@ export default function AppointmentScreen() {
         { label: t.booking.age, value: patient?.age ?? '—' },
         { label: t.booking.gender, value: genderLabel },
     ];
-
-    const confirmCancel = () => {
-        setCancelOpen(false);
-        cancel(appointment.id);
-        goHome();
-    };
 
     return (
         <View style={styles.screen}>
@@ -100,14 +91,16 @@ export default function AppointmentScreen() {
                     <Pressable onPress={goHome} hitSlop={6} style={styles.roundButton} accessibilityLabel={t.booking.done}>
                         <Icon name="check" color={colors.white} size={16} />
                     </Pressable>
-                    <Pressable
-                        onPress={() => setCancelOpen(true)}
-                        hitSlop={6}
-                        style={styles.roundButton}
-                        accessibilityLabel={t.booking.cancel}
-                    >
-                        <Text style={styles.cross}>✕</Text>
-                    </Pressable>
+                    {appointment.status === 'upcoming' ? (
+                        <Pressable
+                            onPress={() => router.push({ pathname: '/cancel/[id]', params: { id: appointment.id } })}
+                            hitSlop={6}
+                            style={styles.roundButton}
+                            accessibilityLabel={t.booking.cancel}
+                        >
+                            <Text style={styles.cross}>✕</Text>
+                        </Pressable>
+                    ) : null}
                 </View>
 
                 <View style={styles.divider} />
@@ -124,16 +117,6 @@ export default function AppointmentScreen() {
                 <Text style={styles.infoLabel}>{t.booking.problem}</Text>
                 <Text style={styles.problem}>{appointment.problem || t.booking.noProblem}</Text>
             </ScrollView>
-
-            <BottomSheet
-                visible={cancelOpen}
-                title={t.booking.cancelQuestion}
-                message={t.booking.cancelText}
-                cancelText={t.common.cancel}
-                confirmText={t.booking.cancelYes}
-                onCancel={() => setCancelOpen(false)}
-                onConfirm={confirmCancel}
-            />
         </View>
     );
 }
