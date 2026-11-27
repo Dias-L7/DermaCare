@@ -30,7 +30,7 @@ export function DoctorRow({
     if (variant === 'favorite') {
         return (
             <View style={styles.card}>
-                <Avatar preset={doctor.avatar} size={64} />
+                <Avatar preset={doctor.avatar} uri={doctor.photo} size={64} />
                 <View style={styles.right}>
                     <Badge text={t.doctors.professional} />
                     <View style={styles.whiteBox}>
@@ -65,7 +65,7 @@ export function DoctorRow({
     if (variant === 'rating') {
         return (
             <View style={styles.card}>
-                <Avatar preset={doctor.avatar} size={64} />
+                <Avatar preset={doctor.avatar} uri={doctor.photo} size={64} />
                 <View style={styles.right}>
                     <View style={styles.badgeRow}>
                         <Badge text={t.doctors.professional} />
@@ -88,7 +88,7 @@ export function DoctorRow({
 
     return (
         <View style={styles.card}>
-            <Avatar preset={doctor.avatar} size={84} />
+            <Avatar preset={doctor.avatar} uri={doctor.photo} size={84} />
             <View style={styles.right}>
                 <Text style={styles.name} numberOfLines={2}>{name}</Text>
                 <Text style={styles.specialty} numberOfLines={1}>{specialty}</Text>

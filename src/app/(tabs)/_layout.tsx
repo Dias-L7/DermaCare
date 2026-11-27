@@ -46,9 +46,6 @@ export default function TabsLayout() {
         name="calendar"
         options={{ tabBarIcon: ({ focused }) => <TabIcon name="calendar" focused={focused} /> }}
       />
-      <Tabs.Screen name="doctors" options={{ href: null }} />
-      <Tabs.Screen name="favorites" options={{ href: null }} />
-      <Tabs.Screen name="doctor/[id]" options={{ href: null }} />
     </Tabs>
   );
 }

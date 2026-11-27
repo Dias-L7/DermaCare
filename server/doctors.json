@@ -7,7 +7,8 @@
     "rating": 5.0,
     "reviews": 63,
     "experience": 12,
-    "avatar": 0
+    "avatar": 0,
+    "photo": "https://randomuser.me/api/portraits/women/44.jpg"
   },
   {
     "id": "d2",
@@ -17,7 +18,8 @@
     "rating": 4.9,
     "reviews": 48,
     "experience": 9,
-    "avatar": 1
+    "avatar": 1,
+    "photo": "https://randomuser.me/api/portraits/men/32.jpg"
   },
   {
     "id": "d3",
@@ -27,7 +29,8 @@
     "rating": 4.7,
     "reviews": 36,
     "experience": 7,
-    "avatar": 2
+    "avatar": 2,
+    "photo": "https://randomuser.me/api/portraits/women/65.jpg"
   },
   {
     "id": "d4",
@@ -37,7 +40,8 @@
     "rating": 4.6,
     "reviews": 29,
     "experience": 6,
-    "avatar": 3
+    "avatar": 3,
+    "photo": "https://randomuser.me/api/portraits/men/46.jpg"
   },
   {
     "id": "d5",
@@ -47,6 +51,62 @@
     "rating": 4.5,
     "reviews": 22,
     "experience": 5,
-    "avatar": 4
+    "avatar": 4,
+    "photo": "https://randomuser.me/api/portraits/women/68.jpg"
+  },
+  {
+    "id": "d6",
+    "name": "Ерлан Жумабеков",
+    "gender": "male",
+    "specialty": "oncology",
+    "rating": 4.8,
+    "reviews": 57,
+    "experience": 15,
+    "avatar": 1,
+    "photo": "https://randomuser.me/api/portraits/men/52.jpg"
+  },
+  {
+    "id": "d7",
+    "name": "Сауле Абдрахманова",
+    "gender": "female",
+    "specialty": "pediatric",
+    "rating": 4.9,
+    "reviews": 71,
+    "experience": 14,
+    "avatar": 0,
+    "photo": "https://randomuser.me/api/portraits/women/47.jpg"
+  },
+  {
+    "id": "d8",
+    "name": "Тимур Ахметов",
+    "gender": "male",
+    "specialty": "cosmetic",
+    "rating": 4.4,
+    "reviews": 18,
+    "experience": 4,
+    "avatar": 3,
+    "photo": "https://randomuser.me/api/portraits/men/22.jpg"
+  },
+  {
+    "id": "d9",
+    "name": "Динара Калиева",
+    "gender": "female",
+    "specialty": "cosmetic",
+    "rating": 4.8,
+    "reviews": 40,
+    "experience": 8,
+    "avatar": 2,
+    "photo": "https://randomuser.me/api/portraits/women/90.jpg"
+  },
+  {
+    "id": "d10",
+    "name": "Нурлан Есенов",
+    "gender": "male",
+    "specialty": "genetics",
+    "rating": 4.3,
+    "reviews": 15,
+    "experience": 3,
+    "avatar": 1,
+    "photo": "https://randomuser.me/api/portraits/men/75.jpg"
   }
 ]

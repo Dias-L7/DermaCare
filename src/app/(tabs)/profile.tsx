@@ -4,56 +4,77 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Avatar } from '../../components/Avatar';
-import { Button } from '../../components/Button';
+import { BottomSheet } from '../../components/BottomSheet';
 import { ConfirmModal } from '../../components/ConfirmModal';
-import { InfoRow } from '../../components/InfoRow';
+import { Icon } from '../../components/Icon';
 import { LanguageSwitch } from '../../components/LanguageSwitch';
+import { MenuRow } from '../../components/MenuRow';
+import { ScreenHeader } from '../../components/ScreenHeader';
 import { useLanguage } from '../../context/LanguageContext';
 import { useUser } from '../../context/UserContext';
 import { userAvatarIndex } from '../../illustrations/avatars';
-import { colors, fonts, spacing } from '../../theme';
+import { colors, fonts, radius, spacing } from '../../theme';
 
 export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
   const { t } = useLanguage();
   const { user, logout } = useUser();
-  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [logoutOpen, setLogoutOpen] = useState(false);
+  const [paymentOpen, setPaymentOpen] = useState(false);
 
   const exit = () => {
-    setConfirmOpen(false);
+    setLogoutOpen(false);
     logout();
     router.replace('/welcome');
   };
 
   return (
-    <ScrollView
-      style={styles.screen}
-      contentContainerStyle={[styles.content, { paddingTop: insets.top + spacing.md }]}
-    >
+    <View style={styles.screen}>
       <StatusBar style="dark" />
-      <Text style={styles.title}>{t.profile.title}</Text>
-      <View style={styles.avatar}>
-        <Avatar preset={userAvatarIndex} size={96} />
-        <Text style={styles.name}>{user?.name}</Text>
-      </View>
-      <InfoRow label={t.profile.email} value={user?.email ?? ''} />
-      <InfoRow label={t.profile.phone} value={user?.phone ?? ''} />
-      <InfoRow label={t.profile.birth} value={user?.birthDate ?? ''} />
-      <View style={styles.language}>
-        <Text style={styles.languageLabel}>{t.profile.language}</Text>
-        <LanguageSwitch />
-      </View>
-      <Button title={t.profile.logout} onPress={() => setConfirmOpen(true)} variant="soft" />
-      <ConfirmModal
-        visible={confirmOpen}
-        title={t.profile.logoutTitle}
-        message={t.profile.logoutText}
-        confirmText={t.profile.logout}
+      <ScrollView contentContainerStyle={[styles.content, { paddingTop: insets.top + spacing.sm }]}>
+        <ScreenHeader title={t.account.myProfile} onBack={() => router.navigate('/home')} />
+
+        <View style={styles.head}>
+          <View>
+            <Avatar preset={userAvatarIndex} size={104} />
+            <View style={styles.editBadge}>
+              <Icon name="pencil" color={colors.white} size={14} />
+            </View>
+          </View>
+          <Text style={styles.name}>{user?.name}</Text>
+        </View>
+
+        <MenuRow icon="user" label={t.account.menuProfile} onPress={() => router.push('/edit-profile')} />
+        <MenuRow icon="heart" label={t.account.menuFavorite} onPress={() => router.push('/favorites')} />
+        <MenuRow icon="card" label={t.account.menuPayment} onPress={() => setPaymentOpen(true)} />
+        <MenuRow icon="lock" label={t.account.menuPrivacy} onPress={() => router.push('/privacy')} />
+        <MenuRow icon="settings" label={t.account.menuSettings} onPress={() => router.push('/settings')} />
+        <MenuRow icon="help" label={t.account.menuHelp} onPress={() => router.push('/help')} />
+        <MenuRow icon="logout" label={t.account.menuLogout} onPress={() => setLogoutOpen(true)} arrow={false} />
+
+        <View style={styles.language}>
+          <Text style={styles.languageLabel}>{t.profile.language}</Text>
+          <LanguageSwitch />
+        </View>
+      </ScrollView>
+
+      <BottomSheet
+        visible={logoutOpen}
+        title={t.account.menuLogout}
+        message={t.account.logoutQuestion}
         cancelText={t.common.cancel}
+        confirmText={t.account.logoutYes}
+        onCancel={() => setLogoutOpen(false)}
         onConfirm={exit}
-        onCancel={() => setConfirmOpen(false)}
       />
-    </ScrollView>
+      <ConfirmModal
+        visible={paymentOpen}
+        title={t.account.menuPayment}
+        message={t.common.imitationText}
+        confirmText={t.common.ok}
+        onConfirm={() => setPaymentOpen(false)}
+      />
+    </View>
   );
 }
 
@@ -63,21 +84,30 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   content: {
-    paddingHorizontal: spacing.md,
-    paddingBottom: spacing.md,
+    paddingHorizontal: spacing.lg,
+    paddingBottom: spacing.lg,
   },
-  title: {
-    ...fonts.bold,
-    fontSize: 22,
-    color: colors.text,
-  },
-  avatar: {
+  head: {
     alignItems: 'center',
-    marginVertical: spacing.lg,
+    marginTop: spacing.sm,
+    marginBottom: spacing.lg,
+  },
+  editBadge: {
+    position: 'absolute',
+    right: 2,
+    bottom: 2,
+    width: 28,
+    height: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.primary,
+    borderRadius: radius.pill,
+    borderWidth: 2,
+    borderColor: colors.white,
   },
   name: {
     ...fonts.bold,
-    fontSize: 18,
+    fontSize: 20,
     color: colors.text,
     marginTop: spacing.sm,
   },
@@ -86,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: spacing.md,
-    marginBottom: spacing.md,
+    marginTop: spacing.sm,
   },
   languageLabel: {
     ...fonts.medium,

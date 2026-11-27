@@ -17,7 +17,7 @@ export function DoctorCard({ doctor, favorite, onToggleFavorite, onInfo }: Props
 
   return (
     <View style={styles.card}>
-      <Avatar preset={doctor.avatar} size={54} />
+      <Avatar preset={doctor.avatar} uri={doctor.photo} size={54} />
       <View style={styles.body}>
         <Text style={styles.name} numberOfLines={1}>
           {t.home.doctorPrefix} {doctor.name}

@@ -11,4 +11,6 @@ export type Doctor = {
   reviews: number;
   experience: number;
   avatar: number;
+  /** Фото врача (randomuser.me). Если не загрузится — показывается SVG-аватар. */
+  photo?: string;
 };

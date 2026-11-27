@@ -19,7 +19,6 @@ export function DoctorsProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let cancelled = false;
-    setStatus('loading');
     fetchDoctors()
       .then((list) => {
         if (cancelled) return;
@@ -36,7 +35,14 @@ export function DoctorsProvider({ children }: { children: ReactNode }) {
   }, [attempt]);
 
   const value = useMemo(
-    () => ({ doctors, status, reload: () => setAttempt((prev) => prev + 1) }),
+    () => ({
+      doctors,
+      status,
+      reload: () => {
+        setStatus('loading');
+        setAttempt((prev) => prev + 1);
+      },
+    }),
     [doctors, status]
   );
 

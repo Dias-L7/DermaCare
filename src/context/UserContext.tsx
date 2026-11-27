@@ -17,6 +17,9 @@ type UserValue = {
   hasAccount: (identifier: string) => boolean;
   resetPassword: (identifier: string, password: string) => boolean;
   logout: () => void;
+  updateProfile: (data: Omit<User, 'password'>) => void;
+  changePassword: (current: string, next: string) => boolean;
+  deleteAccount: () => void;
 };
 
 const demoUser: User = {
@@ -96,9 +99,46 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   const logout = useCallback(() => setUser(null), []);
 
+  const updateProfile = useCallback(
+    (data: Omit<User, 'password'>) => {
+      if (!user) return;
+      const updated: User = { ...data, password: user.password };
+      setAccounts((prev) => prev.map((account) => (account === user ? updated : account)));
+      setUser(updated);
+    },
+    [user]
+  );
+
+  const changePassword = useCallback(
+    (current: string, next: string) => {
+      if (!user || user.password !== current) return false;
+      const updated: User = { ...user, password: next };
+      setAccounts((prev) => prev.map((account) => (account === user ? updated : account)));
+      setUser(updated);
+      return true;
+    },
+    [user]
+  );
+
+  const deleteAccount = useCallback(() => {
+    if (!user) return;
+    setAccounts((prev) => prev.filter((account) => account !== user));
+    setUser(null);
+  }, [user]);
+
   const value = useMemo(
-    () => ({ user, register, login, hasAccount, resetPassword, logout }),
-    [user, register, login, hasAccount, resetPassword, logout]
+    () => ({
+      user,
+      register,
+      login,
+      hasAccount,
+      resetPassword,
+      logout,
+      updateProfile,
+      changePassword,
+      deleteAccount,
+    }),
+    [user, register, login, hasAccount, resetPassword, logout, updateProfile, changePassword, deleteAccount]
   );
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

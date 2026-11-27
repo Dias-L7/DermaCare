@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         color: colors.text,
     },
     chip: {
-        width: 28,
+        minWidth: 28,
         height: 28,
         alignItems: 'center',
         justifyContent: 'center',
@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
         backgroundColor: colors.surface,
     },
     textChip: {
-        width: undefined,
         paddingHorizontal: spacing.sm + 2,
     },
     active: {
