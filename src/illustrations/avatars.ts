@@ -22,7 +22,8 @@ const silhouetteXml = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 
 </svg>`;
 
 export const getAvatarXml = (index: number) => {
-  if (index === userAvatarIndex) return silhouetteXml; const p = presets[index % presets.length];
+  if (index === userAvatarIndex) return silhouetteXml;
+  const p = presets[index % presets.length];
   const backHair = p.long ? `<path d="M26 46c0-20 10-30 24-30s24 10 24 30v30H26z" fill="${p.hair}"/>` : '';
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
 <rect width="100" height="100" fill="${p.background}"/>
