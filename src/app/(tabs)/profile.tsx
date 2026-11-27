@@ -5,7 +5,6 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Avatar } from '../../components/Avatar';
 import { BottomSheet } from '../../components/BottomSheet';
-import { ConfirmModal } from '../../components/ConfirmModal';
 import { Icon } from '../../components/Icon';
 import { LanguageSwitch } from '../../components/LanguageSwitch';
 import { MenuRow } from '../../components/MenuRow';
@@ -20,7 +19,6 @@ export default function ProfileScreen() {
   const { t } = useLanguage();
   const { user, logout } = useUser();
   const [logoutOpen, setLogoutOpen] = useState(false);
-  const [paymentOpen, setPaymentOpen] = useState(false);
 
   const exit = () => {
     setLogoutOpen(false);
@@ -46,8 +44,8 @@ export default function ProfileScreen() {
 
         <MenuRow icon="user" label={t.account.menuProfile} onPress={() => router.push('/edit-profile')} />
         <MenuRow icon="heart" label={t.account.menuFavorite} onPress={() => router.push('/favorites')} />
-        <MenuRow icon="card" label={t.account.menuPayment} onPress={() => setPaymentOpen(true)} />
-        <MenuRow icon="lock" label={t.account.menuPrivacy} onPress={() => router.push('/privacy')} />
+        <MenuRow icon="calendar" label={t.myAppointments.title} onPress={() => router.push('/appointments')} />
+        <MenuRow icon="card" label={t.account.menuPayment} onPress={() => router.push('/payment-method')} />        <MenuRow icon="lock" label={t.account.menuPrivacy} onPress={() => router.push('/privacy')} />
         <MenuRow icon="settings" label={t.account.menuSettings} onPress={() => router.push('/settings')} />
         <MenuRow icon="help" label={t.account.menuHelp} onPress={() => router.push('/help')} />
         <MenuRow icon="logout" label={t.account.menuLogout} onPress={() => setLogoutOpen(true)} arrow={false} />
@@ -66,13 +64,6 @@ export default function ProfileScreen() {
         confirmText={t.account.logoutYes}
         onCancel={() => setLogoutOpen(false)}
         onConfirm={exit}
-      />
-      <ConfirmModal
-        visible={paymentOpen}
-        title={t.account.menuPayment}
-        message={t.common.imitationText}
-        confirmText={t.common.ok}
-        onConfirm={() => setPaymentOpen(false)}
       />
     </View>
   );
