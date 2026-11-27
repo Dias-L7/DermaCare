@@ -43,7 +43,7 @@ export default function HomeScreen() {
       >
         <HomeHeader
           name={user?.name ?? ''}
-          onBell={() => setBellOpen(true)}
+          onBell={() => router.push('/alerts')}
           onSettings={() => router.navigate('/profile')}
         />
         <View style={styles.searchRow}>
