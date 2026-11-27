@@ -15,8 +15,14 @@ const presets: Preset[] = [
   { background: '#BFD0FF', skin: '#E8B992', hair: '#2B2320', coat: '#5B7CFA', long: false },
 ];
 
+const silhouetteXml = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<rect width="100" height="100" fill="#CFD8DC"/>
+<circle cx="50" cy="40" r="18" fill="#FFFFFF"/>
+<path d="M16 100c0-22 15-36 34-36s34 14 34 36z" fill="#FFFFFF"/>
+</svg>`;
+
 export const getAvatarXml = (index: number) => {
-  const p = presets[index % presets.length];
+  if (index === userAvatarIndex) return silhouetteXml; const p = presets[index % presets.length];
   const backHair = p.long ? `<path d="M26 46c0-20 10-30 24-30s24 10 24 30v30H26z" fill="${p.hair}"/>` : '';
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
 <rect width="100" height="100" fill="${p.background}"/>
