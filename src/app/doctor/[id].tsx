@@ -9,11 +9,12 @@ import { ScreenHeader } from '../../components/ScreenHeader';
 import { useDoctors } from '../../context/DoctorsContext';
 import { useFavorites } from '../../context/FavoritesContext';
 import { useLanguage } from '../../context/LanguageContext';
+import { doctorBios } from '../../data/doctorBios';
 import { colors, fonts, radius, spacing } from '../../theme';
 
 export default function DoctorInfoScreen() {
     const insets = useSafeAreaInsets();
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const { id } = useLocalSearchParams<{ id: string }>();
     const { doctors } = useDoctors();
     const { favoriteIds, toggleFavorite } = useFavorites();
@@ -29,10 +30,11 @@ export default function DoctorInfoScreen() {
     }
 
     const favorite = favoriteIds.includes(doctor.id);
+    const bio = doctorBios[doctor.id]?.[language];
     const sections = [
-        { title: t.doctors.profile, text: t.doctors.profileText },
-        { title: t.doctors.career, text: t.doctors.careerText },
-        { title: t.doctors.highlights, text: t.doctors.highlightsText },
+        { title: t.doctors.profile, text: bio?.profile ?? t.doctors.profileText },
+        { title: t.doctors.career, text: bio?.career ?? t.doctors.careerText },
+        { title: t.doctors.highlights, text: bio?.highlights ?? t.doctors.highlightsText },
     ];
 
     return (
@@ -54,7 +56,7 @@ export default function DoctorInfoScreen() {
                             <View style={styles.focusBox}>
                                 <Text style={styles.focusText}>
                                     <Text style={styles.focusLabel}>{t.doctors.focus}: </Text>
-                                    {t.doctors.focusText}
+                                    {bio?.focus ?? t.doctors.focusText}
                                 </Text>
                             </View>
                         </View>
@@ -78,7 +80,7 @@ export default function DoctorInfoScreen() {
                         </View>
                         <View style={[styles.stat, styles.flex]}>
                             <Icon name="clock" color={colors.primary} size={12} />
-                            <Text style={styles.statText} numberOfLines={1}>{t.doctors.workHours}</Text>
+                            <Text style={styles.statText} numberOfLines={1}>{bio?.workHours ?? t.doctors.workHours}</Text>
                         </View>
                     </View>
 
