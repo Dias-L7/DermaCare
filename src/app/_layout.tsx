@@ -1,4 +1,5 @@
 import { Stack } from 'expo-router';
+import { AppointmentsProvider } from '../context/AppointmentsContext';
 import { ChatProvider } from '../context/ChatContext';
 import { DoctorsProvider } from '../context/DoctorsContext';
 import { FavoritesProvider } from '../context/FavoritesContext';
@@ -14,14 +15,16 @@ export default function RootLayout() {
         <SettingsProvider>
           <FavoritesProvider>
             <DoctorsProvider>
-              <ChatProvider>
-                <Stack
-                  screenOptions={{
-                    headerShown: false,
-                    contentStyle: { backgroundColor: colors.background },
-                  }}
-                />
-              </ChatProvider>
+              <AppointmentsProvider>
+                <ChatProvider>
+                  <Stack
+                    screenOptions={{
+                      headerShown: false,
+                      contentStyle: { backgroundColor: colors.background },
+                    }}
+                  />
+                </ChatProvider>
+              </AppointmentsProvider>
             </DoctorsProvider>
           </FavoritesProvider>
         </SettingsProvider>

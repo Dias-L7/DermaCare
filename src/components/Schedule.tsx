@@ -2,7 +2,8 @@ import { useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDoctors } from '../context/DoctorsContext';
 import { useLanguage } from '../context/LanguageContext';
-import { appointments, workHours } from '../data/appointments';
+import { useAppointments } from '../context/AppointmentsContext';
+import { workHours } from '../data/appointments';
 import { spacing } from '../theme';
 import { getDays } from '../utils/schedule';
 import { DayPicker, type DayPickerItem } from './DayPicker';
@@ -11,6 +12,7 @@ import { ScheduleCard, type ScheduleEntry } from './ScheduleCard';
 export function Schedule() {
   const { t } = useLanguage();
   const { doctors } = useDoctors();
+  const { appointments } = useAppointments();
   const [selected, setSelected] = useState(0);
   const days = useMemo(() => getDays(6), []);
 
@@ -32,7 +34,7 @@ export function Schedule() {
       };
     });
 
-  const selectedDate = days[selected].date;
+  const selectedDate = days[selected].date; const hours = [...new Set([...workHours, ...entries.map((entry) => entry.hour)])].sort((a, b) => a - b);
   const dayName = t.days.full[selectedDate.getDay()];
   const heading =
     selected === 0 ? `${dayName} · ${t.home.today}` : `${dayName}, ${selectedDate.getDate()}`;
